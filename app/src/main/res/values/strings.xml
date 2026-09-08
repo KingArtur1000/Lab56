@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Калькулятор</string>
+    <string name="standard_calc">Стандартный</string>
+    <string name="advanced_calc">Расширенный</string>
+    <string name="back">Назад</string>
+    <string name="clear">C</string>
+    <string name="delete">⌫</string>
+    <string name="equals">=</string>
+    <string name="error_divide_zero">Ошибка: деление на ноль</string>
+    <string name="exit_toast">Нажмите ещё раз для выхода</string>
+</resources>
