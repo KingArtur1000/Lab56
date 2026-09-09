@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg_dark">#1C1C1E</color>
-    <color name="button_number">#505050</color>
-    <color name="button_operator">#FF9500</color>
-    <color name="button_function">#8E8E93</color>
-    <color name="button_equals">#FF9500</color>
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#B0B0B0</color>
+
 </resources>

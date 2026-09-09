@@ -1,46 +1,25 @@
 <resources>
     <string name="app_name">Калькулятор</string>
+    <string name="btn_ac">AC</string>
+    <string name="btn_percent">%</string>
+    <string name="btn_divide">÷</string>
+    <string name="btn_7">7</string>
+    <string name="btn_8">8</string>
+    <string name="btn_9">9</string>
+    <string name="btn_multiply">×</string>
+    <string name="btn_4">4</string>
+    <string name="btn_5">5</string>
+    <string name="btn_6">6</string>
+    <string name="btn_minus">-</string>
+    <string name="btn_1">1</string>
+    <string name="btn_2">2</string>
+    <string name="btn_3">3</string>
+    <string name="btn_plus">+</string>
+    <string name="btn_0">0</string>
+    <string name="btn_dot">,</string>
+    <string name="btn_equals">=</string>
 
-    <!-- Заголовки и названия экранов -->
-    <string name="title_start_screen">Калькулятор Xiaomi</string>
-    <string name="btn_standard_mode">Стандартный режим</string>
-    <string name="btn_advanced_mode">Расширенный режим</string>
-    <string name="nav_menu">Меню</string>
-    <string name="nav_engineering">Инженерный ➔</string>
-    <string name="nav_back_to_main">◄ Назад в стандартный</string>
-
-    <!-- Сообщения -->
-    <string name="msg_smart_exit">Нажмите еще раз для выхода</string>
-    <string name="msg_error">Ошибка</string>
-
-    <!-- Кнопки калькулятора -->
-    <string name="calc_digit_0">0</string>
-    <string name="calc_digit_1">1</string>
-    <string name="calc_digit_2">2</string>
-    <string name="calc_digit_3">3</string>
-    <string name="calc_digit_4">4</string>
-    <string name="calc_digit_5">5</string>
-    <string name="calc_digit_6">6</string>
-    <string name="calc_digit_7">7</string>
-    <string name="calc_digit_8">8</string>
-    <string name="calc_digit_9">9</string>
-
-    <!-- Операции -->
-    <string name="calc_op_ac">AC</string>
-    <string name="calc_op_delete">⌫</string>
-    <string name="calc_op_percent">%</string>
-    <string name="calc_op_divide">÷</string>
-    <string name="calc_op_multiply">×</string>
-    <string name="calc_op_subtract">-</string>
-    <string name="calc_op_add">+</string>
-    <string name="calc_op_equals">=</string>
-    <string name="calc_op_dot">,</string>
-    <string name="calc_op_switch">⇇</string>
-
-    <!-- Инженерные функции -->
-    <string name="calc_op_sin">sin</string>
-    <string name="calc_op_cos">cos</string>
-    <string name="calc_op_tan">tan</string>
-    <string name="calc_op_sqrt">√</string>
-    <string name="calc_op_pow">x²</string>
+    <!-- Описания для кнопок-картинок (contentDescription) -->
+    <string name="desc_delete">Стереть символ</string>
+    <string name="desc_switch">Расширенный калькулятор</string>
 </resources>

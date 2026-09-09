@@ -1,64 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:background="#000000"
+    android:padding="16dp">
 
-    <!-- Предпросмотр/Выражение -->
-    <TextView
-        android:id="@+id/tvExpression"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:paddingEnd="16dp"
-        android:paddingTop="32dp"
-        android:textColor="#8E8E93"
-        android:textSize="28sp" />
-
-    <!-- Основное число -->
-    <TextView
-        android:id="@+id/tvDisplay"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="bottom|end"
-        android:padding="16dp"
-        android:text="@string/calc_digit_0"
-        android:textColor="#FFFFFF"
-        android:textSize="68sp" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvExpression"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textColor="#FFFFFF"
+            android:textSize="56sp"
+            android:maxLines="2" />
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textColor="#888888"
+            android:textSize="32sp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:alignmentMode="alignMargins"
+        android:layout_marginTop="24dp"
         android:columnCount="4"
-        android:rowCount="5">
+        android:rowCount="5"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false">
 
-        <Button android:id="@+id/btnAC" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_ac" />
-        <Button android:id="@+id/btnDel" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_delete" />
-        <Button android:id="@+id/btnPercent" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_percent" />
-        <Button android:id="@+id/btnDiv" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_divide" />
+        <!-- Row 1 -->
+        <Button android:id="@+id/btnAC" style="@style/CalcButton" android:text="@string/btn_ac" android:textColor="#FF6D00" />
+        <ImageButton android:id="@+id/btnDelete" style="@style/CalcButton" android:src="@android:drawable/ic_input_delete" app:tint="#FF6D00" android:contentDescription="@string/desc_delete" />
+        <Button android:id="@+id/btnPercent" style="@style/CalcButton" android:text="@string/btn_percent" android:textColor="#FF6D00" />
+        <Button android:id="@+id/btnDivide" style="@style/CalcButton" android:text="@string/btn_divide" android:textColor="#FF6D00" />
 
-        <Button android:id="@+id/btn7" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_7" />
-        <Button android:id="@+id/btn8" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_8" />
-        <Button android:id="@+id/btn9" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_9" />
-        <Button android:id="@+id/btnMul" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_multiply" />
+        <!-- Row 2 -->
+        <Button android:id="@+id/btn7" style="@style/CalcButton" android:text="@string/btn_7" />
+        <Button android:id="@+id/btn8" style="@style/CalcButton" android:text="@string/btn_8" />
+        <Button android:id="@+id/btn9" style="@style/CalcButton" android:text="@string/btn_9" />
+        <Button android:id="@+id/btnMultiply" style="@style/CalcButton" android:text="@string/btn_multiply" android:textColor="#FF6D00" />
 
-        <Button android:id="@+id/btn4" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_4" />
-        <Button android:id="@+id/btn5" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_5" />
-        <Button android:id="@+id/btn6" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_6" />
-        <Button android:id="@+id/btnSub" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_subtract" />
+        <!-- Row 3 -->
+        <Button android:id="@+id/btn4" style="@style/CalcButton" android:text="@string/btn_4" />
+        <Button android:id="@+id/btn5" style="@style/CalcButton" android:text="@string/btn_5" />
+        <Button android:id="@+id/btn6" style="@style/CalcButton" android:text="@string/btn_6" />
+        <Button android:id="@+id/btnMinus" style="@style/CalcButton" android:text="@string/btn_minus" android:textColor="#FF6D00" />
 
-        <Button android:id="@+id/btn1" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_1" />
-        <Button android:id="@+id/btn2" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_2" />
-        <Button android:id="@+id/btn3" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_3" />
-        <Button android:id="@+id/btnAdd" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_add" />
+        <!-- Row 4 -->
+        <Button android:id="@+id/btn1" style="@style/CalcButton" android:text="@string/btn_1" />
+        <Button android:id="@+id/btn2" style="@style/CalcButton" android:text="@string/btn_2" />
+        <Button android:id="@+id/btn3" style="@style/CalcButton" android:text="@string/btn_3" />
+        <Button android:id="@+id/btnPlus" style="@style/CalcButton" android:text="@string/btn_plus" android:textColor="#FF6D00" />
 
-        <Button android:id="@+id/btnSwitch" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_switch" />
-        <Button android:id="@+id/btn0" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_0" />
-        <Button android:id="@+id/btnDot" style="@style/XiaomiDarkBtn" android:text="@string/calc_op_dot" />
-        <Button android:id="@+id/btnEquals" style="@style/XiaomiDarkBtnEquals" android:text="@string/calc_op_equals" />
+        <!-- Row 5 -->
+        <ImageButton android:id="@+id/btnSwitch" style="@style/CalcButton" android:src="@android:drawable/ic_menu_rotate" app:tint="#FF6D00" android:contentDescription="@string/desc_switch" />
+        <Button android:id="@+id/btn0" style="@style/CalcButton" android:text="@string/btn_0" />
+        <Button android:id="@+id/btnDot" style="@style/CalcButton" android:text="@string/btn_dot" />
+        <Button android:id="@+id/btnEquals" style="@style/CalcButton" android:backgroundTint="#FF6D00" android:text="@string/btn_equals" android:textColor="#FFFFFF" />
+
     </GridLayout>
 </LinearLayout>
