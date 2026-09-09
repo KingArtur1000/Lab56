@@ -1,15 +1,16 @@
 package com.kingartur1000.lab56
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.toColorInt
 
 class AdvancedActivity : AppCompatActivity() {
 
     private lateinit var tvExpression: TextView
+    private lateinit var tvResult: TextView
     private var expression = ""
     private var is2ndActive = false
 
@@ -18,17 +19,18 @@ class AdvancedActivity : AppCompatActivity() {
         setContentView(R.layout.activity_advanced)
 
         tvExpression = findViewById(R.id.tvExpression)
+        tvResult = findViewById(R.id.tvResult)
 
         expression = intent.getStringExtra("EXPRESSION") ?: ""
         if (expression.isNotEmpty()) {
             tvExpression.text = expression
+            updatePreviewResult()
         }
 
         setupButtons()
     }
 
     private fun setupButtons() {
-        // Цифровые кнопки
         val digitButtons = mapOf(
             R.id.btn0 to "0", R.id.btn1 to "1", R.id.btn2 to "2",
             R.id.btn3 to "3", R.id.btn4 to "4", R.id.btn5 to "5",
@@ -39,7 +41,6 @@ class AdvancedActivity : AppCompatActivity() {
             findViewById<Button>(id)?.setOnClickListener { appendToExpression(valStr) }
         }
 
-        // Арифметические операторы и скобки
         val opButtons = mapOf(
             R.id.btnPlus to "+", R.id.btnMinus to "-",
             R.id.btnMultiply to "×", R.id.btnDivide to "÷",
@@ -50,7 +51,6 @@ class AdvancedActivity : AppCompatActivity() {
             findViewById<Button>(id)?.setOnClickListener { appendToExpression(valStr) }
         }
 
-        // Кнопка 2ND и контекстные функции
         val btn2nd = findViewById<Button>(R.id.btn2nd)
         val btnSin = findViewById<Button>(R.id.btnSin)
         val btnCos = findViewById<Button>(R.id.btnCos)
@@ -62,32 +62,31 @@ class AdvancedActivity : AppCompatActivity() {
         btn2nd?.setOnClickListener {
             is2ndActive = !is2ndActive
             if (is2ndActive) {
-                btn2nd.setTextColor("#FF6D00".toColorInt())
-                btnSin?.text = getString(R.string.btn_asin)
-                btnCos?.text = getString(R.string.btn_acos)
-                btnTan?.text = getString(R.string.btn_atan)
-                btnLn?.text = getString(R.string.btn_ex)
-                btnLg?.text = getString(R.string.btn_10x)
-                btnSqrt?.text = getString(R.string.btn_x2)
+                btn2nd.setTextColor(Color.parseColor("#FF6D00"))
+                btnSin?.text = "asin"
+                btnCos?.text = "acos"
+                btnTan?.text = "atan"
+                btnLn?.text = "eˣ"
+                btnLg?.text = "10ˣ"
+                btnSqrt?.text = "x²"
             } else {
-                btn2nd.setTextColor("#E0E0E0".toColorInt())
-                btnSin?.text = getString(R.string.btn_sin)
-                btnCos?.text = getString(R.string.btn_cos)
-                btnTan?.text = getString(R.string.btn_tan)
-                btnLn?.text = getString(R.string.btn_ln)
-                btnLg?.text = getString(R.string.btn_lg)
-                btnSqrt?.text = getString(R.string.btn_sqrt)
+                btn2nd.setTextColor(Color.parseColor("#E0E0E0"))
+                btnSin?.text = "sin"
+                btnCos?.text = "cos"
+                btnTan?.text = "tan"
+                btnLn?.text = "ln"
+                btnLg?.text = "lg"
+                btnSqrt?.text = "√"
             }
         }
 
         btnSin?.setOnClickListener { appendToExpression(if (is2ndActive) "asin(" else "sin(") }
         btnCos?.setOnClickListener { appendToExpression(if (is2ndActive) "acos(" else "cos(") }
-        btnTan?.setOnClickListener { appendToExpression(if (is2ndActive) "atan(" else "atan(") }
+        btnTan?.setOnClickListener { appendToExpression(if (is2ndActive) "atan(" else "tan(") }
         btnLn?.setOnClickListener { appendToExpression(if (is2ndActive) "E^(" else "ln(") }
         btnLg?.setOnClickListener { appendToExpression(if (is2ndActive) "10^(" else "lg(") }
         btnSqrt?.setOnClickListener { appendToExpression(if (is2ndActive) "^2" else "√(") }
 
-        // Статичные функции и константы
         val staticFuncButtons = mapOf(
             R.id.btnPow to "^", R.id.btnFact to "!", R.id.btnPi to "π",
             R.id.btnE to "E"
@@ -103,12 +102,14 @@ class AdvancedActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnC)?.setOnClickListener {
             expression = ""
             tvExpression.text = "0"
+            tvResult.text = ""
         }
 
         findViewById<Button>(R.id.btnDelete)?.setOnClickListener {
             if (expression.isNotEmpty()) {
                 expression = expression.substring(0, expression.length - 1)
-                tvExpression.text = expression.ifEmpty { "0" }
+                tvExpression.text = if (expression.isEmpty()) "0" else expression
+                updatePreviewResult()
             }
         }
 
@@ -127,6 +128,20 @@ class AdvancedActivity : AppCompatActivity() {
     private fun appendToExpression(str: String) {
         expression += str
         tvExpression.text = expression
+        updatePreviewResult()
+    }
+
+    private fun updatePreviewResult() {
+        if (expression.isEmpty()) {
+            tvResult.text = ""
+            return
+        }
+        try {
+            val result = CalculatorEngine.evaluate(expression)
+            tvResult.text = CalculatorEngine.formatResult(result)
+        } catch (_: Exception) {
+            tvResult.text = ""
+        }
     }
 
     private fun calculateResult() {
@@ -135,9 +150,11 @@ class AdvancedActivity : AppCompatActivity() {
             val result = CalculatorEngine.evaluate(expression)
             val formatted = CalculatorEngine.formatResult(result)
             tvExpression.text = formatted
+            tvResult.text = ""
             expression = formatted
         } catch (_: Exception) {
             tvExpression.text = "Ошибка"
+            tvResult.text = ""
         }
     }
 }
