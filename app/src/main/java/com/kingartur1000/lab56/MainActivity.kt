@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             tvResult.text = ""
         }
 
-        findViewById<ImageButton>(R.id.btnDelete).setOnClickListener {
+        findViewById<Button>(R.id.btnDelete).setOnClickListener {
             animateClick(it)
             val currentText = tvExpression.text.toString()
             if (currentText.isNotEmpty()) {
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<ImageButton>(R.id.btnSwitch).setOnClickListener {
+        findViewById<Button>(R.id.btnSwitch).setOnClickListener {
             animateClick(it)
             val intent = android.content.Intent(this, AdvancedActivity::class.java)
             startActivity(intent)

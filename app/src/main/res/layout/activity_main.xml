@@ -5,14 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#000000"
-    android:padding="16dp">
+    android:padding="12dp">
 
+    <!-- Экран вывода результатов -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="bottom|end"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/tvExpression"
@@ -20,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:textColor="#FFFFFF"
-            android:textSize="56sp"
+            android:textSize="48sp"
             android:maxLines="2" />
 
         <TextView
@@ -33,44 +35,54 @@
             android:layout_marginTop="8dp" />
     </LinearLayout>
 
+    <!-- Сетка кнопок -->
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.8"
         android:columnCount="4"
         android:rowCount="5"
-        android:alignmentMode="alignMargins"
-        android:columnOrderPreserved="false">
+        android:alignmentMode="alignMargins">
 
-        <!-- Row 1 -->
-        <Button android:id="@+id/btnAC" style="@style/CalcButton" android:text="@string/btn_ac" android:textColor="#FF6D00" />
-        <ImageButton android:id="@+id/btnDelete" style="@style/CalcButton" android:src="@android:drawable/ic_input_delete" app:tint="#FF6D00" android:contentDescription="@string/desc_delete" />
-        <Button android:id="@+id/btnPercent" style="@style/CalcButton" android:text="@string/btn_percent" android:textColor="#FF6D00" />
-        <Button android:id="@+id/btnDivide" style="@style/CalcButton" android:text="@string/btn_divide" android:textColor="#FF6D00" />
+        <!-- Ряд 1 -->
+        <Button android:id="@+id/btnAC" style="@style/CalcButton" android:text="@string/btn_ac" android:textColor="#FF6D00" android:textSize="22sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            style="@style/CalcButton"
+            app:icon="@android:drawable/ic_input_delete"
+            app:iconTint="#FF6D00"
+            android:contentDescription="@string/desc_delete" />
+        <Button android:id="@+id/btnPercent" style="@style/CalcButton" android:text="@string/btn_percent" android:textColor="#FF6D00" android:textSize="22sp" />
+        <Button android:id="@+id/btnDivide" style="@style/CalcButton" android:text="@string/btn_divide" android:textColor="#FF6D00" android:textSize="24sp" />
 
-        <!-- Row 2 -->
-        <Button android:id="@+id/btn7" style="@style/CalcButton" android:text="@string/btn_7" />
-        <Button android:id="@+id/btn8" style="@style/CalcButton" android:text="@string/btn_8" />
-        <Button android:id="@+id/btn9" style="@style/CalcButton" android:text="@string/btn_9" />
-        <Button android:id="@+id/btnMultiply" style="@style/CalcButton" android:text="@string/btn_multiply" android:textColor="#FF6D00" />
+        <!-- Ряд 2 -->
+        <Button android:id="@+id/btn7" style="@style/CalcButton" android:text="@string/btn_7" android:textSize="22sp" />
+        <Button android:id="@+id/btn8" style="@style/CalcButton" android:text="@string/btn_8" android:textSize="22sp" />
+        <Button android:id="@+id/btn9" style="@style/CalcButton" android:text="@string/btn_9" android:textSize="22sp" />
+        <Button android:id="@+id/btnMultiply" style="@style/CalcButton" android:text="@string/btn_multiply" android:textColor="#FF6D00" android:textSize="24sp" />
 
-        <!-- Row 3 -->
-        <Button android:id="@+id/btn4" style="@style/CalcButton" android:text="@string/btn_4" />
-        <Button android:id="@+id/btn5" style="@style/CalcButton" android:text="@string/btn_5" />
-        <Button android:id="@+id/btn6" style="@style/CalcButton" android:text="@string/btn_6" />
-        <Button android:id="@+id/btnMinus" style="@style/CalcButton" android:text="@string/btn_minus" android:textColor="#FF6D00" />
+        <!-- Ряд 3 -->
+        <Button android:id="@+id/btn4" style="@style/CalcButton" android:text="@string/btn_4" android:textSize="22sp" />
+        <Button android:id="@+id/btn5" style="@style/CalcButton" android:text="@string/btn_5" android:textSize="22sp" />
+        <Button android:id="@+id/btn6" style="@style/CalcButton" android:text="@string/btn_6" android:textSize="22sp" />
+        <Button android:id="@+id/btnMinus" style="@style/CalcButton" android:text="@string/btn_minus" android:textColor="#FF6D00" android:textSize="24sp" />
 
-        <!-- Row 4 -->
-        <Button android:id="@+id/btn1" style="@style/CalcButton" android:text="@string/btn_1" />
-        <Button android:id="@+id/btn2" style="@style/CalcButton" android:text="@string/btn_2" />
-        <Button android:id="@+id/btn3" style="@style/CalcButton" android:text="@string/btn_3" />
-        <Button android:id="@+id/btnPlus" style="@style/CalcButton" android:text="@string/btn_plus" android:textColor="#FF6D00" />
+        <!-- Ряд 4 -->
+        <Button android:id="@+id/btn1" style="@style/CalcButton" android:text="@string/btn_1" android:textSize="22sp" />
+        <Button android:id="@+id/btn2" style="@style/CalcButton" android:text="@string/btn_2" android:textSize="22sp" />
+        <Button android:id="@+id/btn3" style="@style/CalcButton" android:text="@string/btn_3" android:textSize="22sp" />
+        <Button android:id="@+id/btnPlus" style="@style/CalcButton" android:text="@string/btn_plus" android:textColor="#FF6D00" android:textSize="24sp" />
 
-        <!-- Row 5 -->
-        <ImageButton android:id="@+id/btnSwitch" style="@style/CalcButton" android:src="@android:drawable/ic_menu_rotate" app:tint="#FF6D00" android:contentDescription="@string/desc_switch" />
-        <Button android:id="@+id/btn0" style="@style/CalcButton" android:text="@string/btn_0" />
-        <Button android:id="@+id/btnDot" style="@style/CalcButton" android:text="@string/btn_dot" />
-        <Button android:id="@+id/btnEquals" style="@style/CalcButton" android:backgroundTint="#FF6D00" android:text="@string/btn_equals" android:textColor="#FFFFFF" />
+        <!-- Ряд 5 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSwitch"
+            style="@style/CalcButton"
+            app:icon="@android:drawable/ic_menu_rotate"
+            app:iconTint="#FF6D00"
+            android:contentDescription="@string/desc_switch" />
+        <Button android:id="@+id/btn0" style="@style/CalcButton" android:text="@string/btn_0" android:textSize="22sp" />
+        <Button android:id="@+id/btnDot" style="@style/CalcButton" android:text="@string/btn_dot" android:textSize="22sp" />
+        <Button android:id="@+id/btnEquals" style="@style/CalcButton" android:backgroundTint="#FF6D00" android:text="@string/btn_equals" android:textColor="#FFFFFF" android:textSize="24sp" />
 
     </GridLayout>
 </LinearLayout>
