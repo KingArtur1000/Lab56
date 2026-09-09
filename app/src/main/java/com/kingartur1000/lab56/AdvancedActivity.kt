@@ -1,6 +1,7 @@
 package com.kingartur1000.lab56
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -10,6 +11,7 @@ class AdvancedActivity : AppCompatActivity() {
 
     private lateinit var tvExpression: TextView
     private var expression = ""
+    private var is2ndActive = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,7 @@ class AdvancedActivity : AppCompatActivity() {
     }
 
     private fun setupButtons() {
+        // Цифровые кнопки
         val digitButtons = mapOf(
             R.id.btn0 to "0", R.id.btn1 to "1", R.id.btn2 to "2",
             R.id.btn3 to "3", R.id.btn4 to "4", R.id.btn5 to "5",
@@ -36,7 +39,7 @@ class AdvancedActivity : AppCompatActivity() {
             findViewById<Button>(id)?.setOnClickListener { appendToExpression(valStr) }
         }
 
-        // Обновлены ID кнопок под activity_advanced.xml
+        // Арифметические операторы и скобки
         val opButtons = mapOf(
             R.id.btnPlus to "+", R.id.btnMinus to "-",
             R.id.btnMultiply to "×", R.id.btnDivide to "÷",
@@ -47,23 +50,56 @@ class AdvancedActivity : AppCompatActivity() {
             findViewById<Button>(id)?.setOnClickListener { appendToExpression(valStr) }
         }
 
-        // Заменили btnPower на btnPow
-        val funcButtons = mapOf(
-            R.id.btnSin to "sin(", R.id.btnCos to "cos(", R.id.btnTan to "tan(",
-            R.id.btnLg to "lg(", R.id.btnLn to "ln(", R.id.btnSqrt to "√(",
+        // Кнопка 2ND и контекстные функции
+        val btn2nd = findViewById<Button>(R.id.btn2nd)
+        val btnSin = findViewById<Button>(R.id.btnSin)
+        val btnCos = findViewById<Button>(R.id.btnCos)
+        val btnTan = findViewById<Button>(R.id.btnTan)
+        val btnLn = findViewById<Button>(R.id.btnLn)
+        val btnLg = findViewById<Button>(R.id.btnLg)
+        val btnSqrt = findViewById<Button>(R.id.btnSqrt)
+
+        btn2nd?.setOnClickListener {
+            is2ndActive = !is2ndActive
+            if (is2ndActive) {
+                btn2nd.setTextColor(Color.parseColor("#FF6D00"))
+                btnSin?.text = "asin"
+                btnCos?.text = "acos"
+                btnTan?.text = "atan"
+                btnLn?.text = "eˣ"
+                btnLg?.text = "10ˣ"
+                btnSqrt?.text = "x²"
+            } else {
+                btn2nd.setTextColor(Color.parseColor("#E0E0E0"))
+                btnSin?.text = "sin"
+                btnCos?.text = "cos"
+                btnTan?.text = "tan"
+                btnLn?.text = "ln"
+                btnLg?.text = "lg"
+                btnSqrt?.text = "√"
+            }
+        }
+
+        btnSin?.setOnClickListener { appendToExpression(if (is2ndActive) "asin(" else "sin(") }
+        btnCos?.setOnClickListener { appendToExpression(if (is2ndActive) "acos(" else "cos(") }
+        btnTan?.setOnClickListener { appendToExpression(if (is2ndActive) "atan(" else "atan(") }
+        btnLn?.setOnClickListener { appendToExpression(if (is2ndActive) "E^(" else "ln(") }
+        btnLg?.setOnClickListener { appendToExpression(if (is2ndActive) "10^(" else "lg(") }
+        btnSqrt?.setOnClickListener { appendToExpression(if (is2ndActive) "^2" else "√(") }
+
+        // Статичные функции и константы
+        val staticFuncButtons = mapOf(
             R.id.btnPow to "^", R.id.btnFact to "!", R.id.btnPi to "π",
             R.id.btnE to "E"
         )
-        for ((id, valStr) in funcButtons) {
+        for ((id, valStr) in staticFuncButtons) {
             findViewById<Button>(id)?.setOnClickListener { appendToExpression(valStr) }
         }
 
-        // Заменили btnInverse на btnInv
         findViewById<Button>(R.id.btnInv)?.setOnClickListener {
             appendToExpression("1/")
         }
 
-        // Заменили btnClear на btnC
         findViewById<Button>(R.id.btnC)?.setOnClickListener {
             expression = ""
             tvExpression.text = "0"

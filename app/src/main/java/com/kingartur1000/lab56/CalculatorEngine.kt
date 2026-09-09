@@ -5,7 +5,6 @@ import kotlin.math.ln
 object CalculatorEngine {
 
     fun evaluate(expression: String): Double {
-        // Подготовка выражения перед парсингом
         val str = expression
             .replace("×", "*")
             .replace("÷", "/")
@@ -13,7 +12,7 @@ object CalculatorEngine {
             .replace("π", Math.PI.toString())
             .replace("E", Math.E.toString())
 
-        return object : Any() {
+        val result = object : Any() {
             var pos = -1
             var ch = 0
 
@@ -77,6 +76,9 @@ object CalculatorEngine {
                         "sin" -> Math.sin(Math.toRadians(x))
                         "cos" -> Math.cos(Math.toRadians(x))
                         "tan" -> Math.tan(Math.toRadians(x))
+                        "asin" -> Math.toDegrees(Math.asin(x))
+                        "acos" -> Math.toDegrees(Math.acos(x))
+                        "atan" -> Math.toDegrees(Math.atan(x))
                         "lg" -> Math.log10(x)
                         "ln" -> ln(x)
                         "√" -> Math.sqrt(x)
@@ -95,6 +97,11 @@ object CalculatorEngine {
                 return x
             }
         }.parse()
+
+        if (result.isNaN() || result.isInfinite()) {
+            throw ArithmeticException("Математическая ошибка")
+        }
+        return result
     }
 
     fun formatResult(result: Double): String {
