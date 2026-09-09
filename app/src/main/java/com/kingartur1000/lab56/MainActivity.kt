@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnDelete)?.setOnClickListener {
             if (expression.isNotEmpty()) {
                 expression = expression.substring(0, expression.length - 1)
-                tvExpression.text = if (expression.isEmpty()) "0" else expression
+                tvExpression.text = expression.ifEmpty { "0" }
             }
         }
 

@@ -1,6 +1,15 @@
 package com.kingartur1000.lab56
 
+import kotlin.math.acos
+import kotlin.math.asin
+import kotlin.math.atan
+import kotlin.math.cos
 import kotlin.math.ln
+import kotlin.math.log10
+import kotlin.math.pow
+import kotlin.math.sin
+import kotlin.math.sqrt
+import kotlin.math.tan
 
 object CalculatorEngine {
 
@@ -73,22 +82,22 @@ object CalculatorEngine {
                     val func = str.substring(startPos, pos)
                     x = parseFactor()
                     x = when (func) {
-                        "sin" -> Math.sin(Math.toRadians(x))
-                        "cos" -> Math.cos(Math.toRadians(x))
-                        "tan" -> Math.tan(Math.toRadians(x))
-                        "asin" -> Math.toDegrees(Math.asin(x))
-                        "acos" -> Math.toDegrees(Math.acos(x))
-                        "atan" -> Math.toDegrees(Math.atan(x))
-                        "lg" -> Math.log10(x)
+                        "sin" -> sin(Math.toRadians(x))
+                        "cos" -> cos(Math.toRadians(x))
+                        "tan" -> tan(Math.toRadians(x))
+                        "asin" -> Math.toDegrees(asin(x))
+                        "acos" -> Math.toDegrees(acos(x))
+                        "atan" -> Math.toDegrees(atan(x))
+                        "lg" -> log10(x)
                         "ln" -> ln(x)
-                        "√" -> Math.sqrt(x)
+                        "√" -> sqrt(x)
                         else -> throw RuntimeException("Неизвестная функция: $func")
                     }
                 } else {
                     throw RuntimeException("Неожиданный символ: " + ch.toChar())
                 }
 
-                if (eat('^'.code)) x = Math.pow(x, parseFactor())
+                if (eat('^'.code)) x = x.pow(parseFactor())
                 if (eat('!'.code)) {
                     var fact = 1.0
                     for (i in 1..x.toInt()) fact *= i
