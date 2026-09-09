@@ -2,52 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F7F7"
+    android:background="#000000"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="12dp">
 
-    <!-- Верхняя панель навигации -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnNavStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="@string/nav_menu"
-            android:textColor="#FF6B00" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btnNavAdvanced"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="@string/nav_engineering"
-            android:textColor="#FF6B00" />
-    </LinearLayout>
-
-    <!-- Дисплей предпросмотра выражения -->
+    <!-- Предпросмотр/Выражение -->
     <TextView
         android:id="@+id/tvExpression"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom|end"
+        android:gravity="end"
         android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:text=""
-        android:textColor="#888888"
-        android:textSize="24sp" />
+        android:paddingTop="32dp"
+        android:textColor="#8E8E93"
+        android:textSize="28sp" />
 
-    <!-- Основной дисплей ввода/результата -->
+    <!-- Основное число -->
     <TextView
         android:id="@+id/tvDisplay"
         android:layout_width="match_parent"
@@ -56,11 +26,9 @@
         android:gravity="bottom|end"
         android:padding="16dp"
         android:text="@string/calc_digit_0"
-        android:textColor="#000000"
-        android:textSize="52sp"
-        android:textStyle="bold" />
+        android:textColor="#FFFFFF"
+        android:textSize="68sp" />
 
-    <!-- Клавиатура -->
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,29 +36,29 @@
         android:columnCount="4"
         android:rowCount="5">
 
-        <Button android:id="@+id/btnAC" style="@style/CalcButton" android:text="@string/calc_op_ac" android:textColor="#FF6B00" />
-        <Button android:id="@+id/btnDel" style="@style/CalcButton" android:text="@string/calc_op_delete" android:textColor="#FF6B00" />
-        <Button android:id="@+id/btnPercent" style="@style/CalcButton" android:text="@string/calc_op_percent" android:textColor="#FF6B00" />
-        <Button android:id="@+id/btnDiv" style="@style/CalcButton" android:text="@string/calc_op_divide" android:textColor="#FF6B00" />
+        <Button android:id="@+id/btnAC" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_ac" />
+        <Button android:id="@+id/btnDel" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_delete" />
+        <Button android:id="@+id/btnPercent" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_percent" />
+        <Button android:id="@+id/btnDiv" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_divide" />
 
-        <Button android:id="@+id/btn7" style="@style/CalcButton" android:text="@string/calc_digit_7" />
-        <Button android:id="@+id/btn8" style="@style/CalcButton" android:text="@string/calc_digit_8" />
-        <Button android:id="@+id/btn9" style="@style/CalcButton" android:text="@string/calc_digit_9" />
-        <Button android:id="@+id/btnMul" style="@style/CalcButton" android:text="@string/calc_op_multiply" android:textColor="#FF6B00" />
+        <Button android:id="@+id/btn7" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_7" />
+        <Button android:id="@+id/btn8" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_8" />
+        <Button android:id="@+id/btn9" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_9" />
+        <Button android:id="@+id/btnMul" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_multiply" />
 
-        <Button android:id="@+id/btn4" style="@style/CalcButton" android:text="@string/calc_digit_4" />
-        <Button android:id="@+id/btn5" style="@style/CalcButton" android:text="@string/calc_digit_5" />
-        <Button android:id="@+id/btn6" style="@style/CalcButton" android:text="@string/calc_digit_6" />
-        <Button android:id="@+id/btnSub" style="@style/CalcButton" android:text="@string/calc_op_subtract" android:textColor="#FF6B00" />
+        <Button android:id="@+id/btn4" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_4" />
+        <Button android:id="@+id/btn5" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_5" />
+        <Button android:id="@+id/btn6" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_6" />
+        <Button android:id="@+id/btnSub" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_subtract" />
 
-        <Button android:id="@+id/btn1" style="@style/CalcButton" android:text="@string/calc_digit_1" />
-        <Button android:id="@+id/btn2" style="@style/CalcButton" android:text="@string/calc_digit_2" />
-        <Button android:id="@+id/btn3" style="@style/CalcButton" android:text="@string/calc_digit_3" />
-        <Button android:id="@+id/btnAdd" style="@style/CalcButton" android:text="@string/calc_op_add" android:textColor="#FF6B00" />
+        <Button android:id="@+id/btn1" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_1" />
+        <Button android:id="@+id/btn2" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_2" />
+        <Button android:id="@+id/btn3" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_3" />
+        <Button android:id="@+id/btnAdd" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_add" />
 
-        <Button android:id="@+id/btnSwitch" style="@style/CalcButton" android:text="@string/calc_op_switch" android:textColor="#FF6B00" />
-        <Button android:id="@+id/btn0" style="@style/CalcButton" android:text="@string/calc_digit_0" />
-        <Button android:id="@+id/btnDot" style="@style/CalcButton" android:text="@string/calc_op_dot" />
-        <Button android:id="@+id/btnEquals" style="@style/CalcButtonAccent" android:text="@string/calc_op_equals" />
+        <Button android:id="@+id/btnSwitch" style="@style/XiaomiDarkBtnOrange" android:text="@string/calc_op_switch" />
+        <Button android:id="@+id/btn0" style="@style/XiaomiDarkBtn" android:text="@string/calc_digit_0" />
+        <Button android:id="@+id/btnDot" style="@style/XiaomiDarkBtn" android:text="@string/calc_op_dot" />
+        <Button android:id="@+id/btnEquals" style="@style/XiaomiDarkBtnEquals" android:text="@string/calc_op_equals" />
     </GridLayout>
 </LinearLayout>

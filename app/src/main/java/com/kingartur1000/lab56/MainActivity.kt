@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private var firstNum: BigDecimal? = null
     private var currentOperation: String = ""
     private var isNewInput = true
+    private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,18 +29,12 @@ class MainActivity : AppCompatActivity() {
         tvExpression = findViewById(R.id.tvExpression)
         val animClick = AnimationUtils.loadAnimation(this, R.anim.button_click)
 
-        // Безопасная навигация без крашей
-        val openActivity = { targetClass: Class<*> ->
-            val intent = Intent(this, targetClass)
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-            startActivity(intent)
-        }
-
-        findViewById<Button>(R.id.btnNavStart).setOnClickListener { openActivity(StartActivity::class.java) }
-        findViewById<Button>(R.id.btnNavAdvanced).setOnClickListener { openActivity(AdvancedActivity::class.java) }
+        // Переход в инженерный режим с анимацией
         findViewById<Button>(R.id.btnSwitch).setOnClickListener { view ->
             view.startAnimation(animClick)
-            openActivity(AdvancedActivity::class.java)
+            val intent = Intent(this, AdvancedActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         // Цифры
@@ -45,7 +42,6 @@ class MainActivity : AppCompatActivity() {
             R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4,
             R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9
         )
-
         for (id in numberIds) {
             findViewById<Button>(id).setOnClickListener { view ->
                 view.startAnimation(animClick)
@@ -59,7 +55,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Операции
         val setOperation = { op: String ->
             val currentValue = getDisplayValue()
             if (currentValue != null) {
@@ -75,7 +70,6 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnMul).setOnClickListener { it.startAnimation(animClick); setOperation("×") }
         findViewById<Button>(R.id.btnDiv).setOnClickListener { it.startAnimation(animClick); setOperation("÷") }
 
-        // Точка/Запятая
         findViewById<Button>(R.id.btnDot).setOnClickListener { view ->
             view.startAnimation(animClick)
             if (isNewInput) {
@@ -86,20 +80,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Процент (%)
         findViewById<Button>(R.id.btnPercent).setOnClickListener { view ->
             view.startAnimation(animClick)
             val currentVal = getDisplayValue() ?: return@setOnClickListener
-            val percentVal = if (firstNum != null && currentOperation.isNotEmpty()) {
-                firstNum!!.multiply(currentVal).divide(BigDecimal("100"), 10, RoundingMode.HALF_UP)
-            } else {
-                currentVal.divide(BigDecimal("100"), 10, RoundingMode.HALF_UP)
-            }
+            val percentVal = currentVal.divide(BigDecimal("100"), 10, RoundingMode.HALF_UP)
             tvDisplay.text = formatValue(percentVal)
             isNewInput = true
         }
 
-        // Сброс (AC)
         findViewById<Button>(R.id.btnAC).setOnClickListener { view ->
             view.startAnimation(animClick)
             tvDisplay.text = getString(R.string.calc_digit_0)
@@ -109,7 +97,6 @@ class MainActivity : AppCompatActivity() {
             isNewInput = true
         }
 
-        // Стирание 1 символа (⌫)
         findViewById<Button>(R.id.btnDel).setOnClickListener { view ->
             view.startAnimation(animClick)
             if (!isNewInput) {
@@ -123,7 +110,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Равно (=)
         findViewById<Button>(R.id.btnEquals).setOnClickListener { view ->
             view.startAnimation(animClick)
             val secondNum = getDisplayValue()
@@ -134,43 +120,35 @@ class MainActivity : AppCompatActivity() {
                         "+" -> firstNum!!.add(secondNum)
                         "-" -> firstNum!!.subtract(secondNum)
                         "×" -> firstNum!!.multiply(secondNum)
-                        "÷" -> {
-                            if (secondNum.compareTo(BigDecimal.ZERO) == 0) null
-                            else firstNum!!.divide(secondNum, 10, RoundingMode.HALF_UP)
-                        }
+                        "÷" -> if (secondNum.compareTo(BigDecimal.ZERO) == 0) null else firstNum!!.divide(secondNum, 10, RoundingMode.HALF_UP)
                         else -> null
                     }
-                } catch (e: Exception) {
-                    null
-                }
+                } catch (e: Exception) { null }
 
-                if (result == null) {
-                    tvDisplay.text = getString(R.string.msg_error)
-                } else {
-                    tvDisplay.text = formatValue(result)
-                }
+                tvDisplay.text = if (result == null) getString(R.string.msg_error) else formatValue(result)
                 firstNum = null
                 currentOperation = ""
                 isNewInput = true
             }
         }
+
+        // Умный выход из приложения
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                    finishAffinity()
+                } else {
+                    Toast.makeText(this@MainActivity, getString(R.string.msg_smart_exit), Toast.LENGTH_SHORT).show()
+                }
+                backPressedTime = System.currentTimeMillis()
+            }
+        })
     }
 
-    private fun getDisplayValue(): BigDecimal? {
-        val text = tvDisplay.text.toString().replace(",", ".")
-        return try {
-            BigDecimal(text)
-        } catch (e: Exception) {
-            null
-        }
-    }
+    private fun getDisplayValue(): BigDecimal? = try { BigDecimal(tvDisplay.text.toString().replace(",", ".")) } catch (e: Exception) { null }
 
     private fun formatValue(value: BigDecimal): String {
         val stripped = value.stripTrailingZeros()
-        return if (stripped.scale() <= 0) {
-            stripped.toBigInteger().toString()
-        } else {
-            stripped.toPlainString()
-        }
+        return if (stripped.scale() <= 0) stripped.toBigInteger().toString() else stripped.toPlainString()
     }
 }

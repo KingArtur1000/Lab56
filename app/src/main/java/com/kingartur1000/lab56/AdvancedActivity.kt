@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.math.cos
-import kotlin.math.sin
-import kotlin.math.sqrt
-import kotlin.math.tan
 
 class AdvancedActivity : AppCompatActivity() {
 
@@ -16,38 +13,24 @@ class AdvancedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_advanced)
 
-        val tvAdvDisplay = findViewById<TextView>(R.id.tvAdvDisplay)
         val animClick = AnimationUtils.loadAnimation(this, R.anim.button_click)
 
-        findViewById<Button>(R.id.btnBackToMain).setOnClickListener {
+        val goBackWithAnim = {
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-        fun getVal(): Double = tvAdvDisplay.text.toString().toDoubleOrNull() ?: 0.0
-
-        findViewById<Button>(R.id.btnSin).setOnClickListener { it.startAnimation(animClick)
-            tvAdvDisplay.text = sin(Math.toRadians(getVal())).toString()
+        // Кнопка переключения "⇇" возвращает назад
+        findViewById<Button>(R.id.btnAdvSwitch).setOnClickListener { view ->
+            view.startAnimation(animClick)
+            goBackWithAnim()
         }
 
-        findViewById<Button>(R.id.btnCos).setOnClickListener { it.startAnimation(animClick)
-            tvAdvDisplay.text = cos(Math.toRadians(getVal())).toString()
-        }
-
-        findViewById<Button>(R.id.btnTan).setOnClickListener { it.startAnimation(animClick)
-            tvAdvDisplay.text = tan(Math.toRadians(getVal())).toString()
-        }
-
-        findViewById<Button>(R.id.btnSqrt).setOnClickListener { it.startAnimation(animClick)
-            tvAdvDisplay.text = sqrt(getVal()).toString()
-        }
-
-        findViewById<Button>(R.id.btnPow).setOnClickListener { it.startAnimation(animClick)
-            val v = getVal()
-            tvAdvDisplay.text = (v * v).toString()
-        }
-
-        findViewById<Button>(R.id.btnAdvAC).setOnClickListener { it.startAnimation(animClick)
-            tvAdvDisplay.text = getString(R.string.calc_digit_0)
-        }
+        // Кнопка Назад устройства
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                goBackWithAnim()
+            }
+        })
     }
 }
