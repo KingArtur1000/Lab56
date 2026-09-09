@@ -1,11 +1,11 @@
 package com.kingartur1000.lab56
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.toColorInt
 
 class AdvancedActivity : AppCompatActivity() {
 
@@ -62,21 +62,21 @@ class AdvancedActivity : AppCompatActivity() {
         btn2nd?.setOnClickListener {
             is2ndActive = !is2ndActive
             if (is2ndActive) {
-                btn2nd.setTextColor(Color.parseColor("#FF6D00"))
-                btnSin?.text = "asin"
-                btnCos?.text = "acos"
-                btnTan?.text = "atan"
-                btnLn?.text = "eˣ"
-                btnLg?.text = "10ˣ"
-                btnSqrt?.text = "x²"
+                btn2nd.setTextColor("#FF6D00".toColorInt())
+                btnSin?.text = R.string.btn_asin.toString()
+                btnCos?.text = R.string.btn_acos.toString()
+                btnTan?.text = R.string.btn_atan.toString()
+                btnLn?.text = R.string.btn_ex.toString()
+                btnLg?.text = R.string.btn_10x.toString()
+                btnSqrt?.text = R.string.btn_x2.toString()
             } else {
-                btn2nd.setTextColor(Color.parseColor("#E0E0E0"))
-                btnSin?.text = "sin"
-                btnCos?.text = "cos"
-                btnTan?.text = "tan"
-                btnLn?.text = "ln"
-                btnLg?.text = "lg"
-                btnSqrt?.text = "√"
+                btn2nd.setTextColor("#E0E0E0".toColorInt())
+                btnSin?.text = R.string.btn_sin.toString()
+                btnCos?.text = R.string.btn_cos.toString()
+                btnTan?.text = R.string.btn_tan.toString()
+                btnLn?.text = R.string.btn_ln.toString()
+                btnLg?.text = R.string.btn_lg.toString()
+                btnSqrt?.text = R.string.btn_sqrt.toString()
             }
         }
 
@@ -108,7 +108,7 @@ class AdvancedActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnDelete)?.setOnClickListener {
             if (expression.isNotEmpty()) {
                 expression = expression.substring(0, expression.length - 1)
-                tvExpression.text = if (expression.isEmpty()) "0" else expression
+                tvExpression.text = expression.ifEmpty { "0" }
             }
         }
 

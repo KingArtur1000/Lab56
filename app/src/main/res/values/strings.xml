@@ -28,11 +28,17 @@
     <string name="btn_2nd">2nd</string>
     <string name="btn_deg">deg</string>
     <string name="btn_sin">sin</string>
+    <string name="btn_asin">asin</string>
     <string name="btn_cos">cos</string>
+    <string name="btn_acos">acos</string>
     <string name="btn_tan">tan</string>
+    <string name="btn_atan">atan</string>
     <string name="btn_pow">xʸ</string>
     <string name="btn_lg">lg</string>
     <string name="btn_ln">ln</string>
+    <string name="btn_ex">eˣ</string>
+    <string name="btn_10x">10ˣ</string>
+    <string name="btn_x2">x²</string>
     <string name="btn_open_paren">(</string>
     <string name="btn_close_paren">)</string>
     <string name="btn_sqrt">√x</string>
