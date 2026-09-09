@@ -63,20 +63,20 @@ class AdvancedActivity : AppCompatActivity() {
             is2ndActive = !is2ndActive
             if (is2ndActive) {
                 btn2nd.setTextColor("#FF6D00".toColorInt())
-                btnSin?.text = R.string.btn_asin.toString()
-                btnCos?.text = R.string.btn_acos.toString()
-                btnTan?.text = R.string.btn_atan.toString()
-                btnLn?.text = R.string.btn_ex.toString()
-                btnLg?.text = R.string.btn_10x.toString()
-                btnSqrt?.text = R.string.btn_x2.toString()
+                btnSin?.text = getString(R.string.btn_asin)
+                btnCos?.text = getString(R.string.btn_acos)
+                btnTan?.text = getString(R.string.btn_atan)
+                btnLn?.text = getString(R.string.btn_ex)
+                btnLg?.text = getString(R.string.btn_10x)
+                btnSqrt?.text = getString(R.string.btn_x2)
             } else {
                 btn2nd.setTextColor("#E0E0E0".toColorInt())
-                btnSin?.text = R.string.btn_sin.toString()
-                btnCos?.text = R.string.btn_cos.toString()
-                btnTan?.text = R.string.btn_tan.toString()
-                btnLn?.text = R.string.btn_ln.toString()
-                btnLg?.text = R.string.btn_lg.toString()
-                btnSqrt?.text = R.string.btn_sqrt.toString()
+                btnSin?.text = getString(R.string.btn_sin)
+                btnCos?.text = getString(R.string.btn_cos)
+                btnTan?.text = getString(R.string.btn_tan)
+                btnLn?.text = getString(R.string.btn_ln)
+                btnLg?.text = getString(R.string.btn_lg)
+                btnSqrt?.text = getString(R.string.btn_sqrt)
             }
         }
 
