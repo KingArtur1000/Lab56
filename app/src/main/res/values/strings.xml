@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Калькулятор</string>
+    <string name="author_name">KingArtur1000</string>
+    <string name="footer_splash">by KingArtur1000</string>
     <string name="btn_ac">AC</string>
     <string name="btn_percent">%</string>
     <string name="btn_divide">÷</string>

@@ -66,6 +66,7 @@
             style="@style/CalcButton"
             app:icon="@android:drawable/ic_input_delete"
             app:iconTint="#FF6D00"
+            app:iconGravity="textStart"
             android:contentDescription="@string/desc_delete" />
         <Button android:id="@+id/btnPercent" style="@style/CalcButton" android:text="@string/btn_percent" android:textColor="#FF6D00" android:textSize="16sp" />
         <Button android:id="@+id/btnDivide" style="@style/CalcButton" android:text="@string/btn_divide" android:textColor="#FF6D00" android:textSize="18sp" />
@@ -97,6 +98,7 @@
             style="@style/CalcButton"
             app:icon="@android:drawable/ic_menu_revert"
             app:iconTint="#FF6D00"
+            app:iconGravity="textStart"
             android:contentDescription="@string/desc_switch_back" />
         <Button android:id="@+id/btnE" style="@style/CalcButton" android:text="@string/btn_e" android:textSize="15sp" />
         <Button android:id="@+id/btn0" style="@style/CalcButton" android:text="@string/btn_0" android:textSize="18sp" />
