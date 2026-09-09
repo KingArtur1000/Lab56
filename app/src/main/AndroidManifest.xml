@@ -9,14 +9,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab56">
 
-        <!-- По умолчанию запускается MainActivity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <!-- По умолчанию запускается MainActivity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
         </activity>
 
         <activity

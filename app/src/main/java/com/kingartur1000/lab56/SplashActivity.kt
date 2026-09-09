@@ -11,10 +11,9 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // Задержка 2 секунды (2000 миллисекунд), затем переход на MainActivity
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
-            finish() // Закрываем Splash, чтобы нельзя было вернуться на него кнопкой "Назад"
+            finish()
         }, 2000)
     }
 }
