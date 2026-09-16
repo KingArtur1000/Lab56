@@ -29,6 +29,7 @@ class AdvancedActivity : AppCompatActivity() {
 
         setupButtons()
         window.decorView.applyPressScaleRecursively()
+        setupExitConfirm()
     }
 
     private fun setupButtons() {
