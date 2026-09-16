@@ -28,6 +28,7 @@ class AdvancedActivity : AppCompatActivity() {
         }
 
         setupButtons()
+        window.decorView.applyPressScaleRecursively()
     }
 
     private fun setupButtons() {
@@ -121,6 +122,7 @@ class AdvancedActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("EXPRESSION", expression)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             finish()
         }
     }
